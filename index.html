@@ -1,6 +1,96 @@
-<html>
- <head></head>
- <body></body>
-  jangan cepet cepet dapet cewe baru
- </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halaman HTML Sederhana</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+    }
+    header {
+      background-color: #2563eb;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #1e40af;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Selamat Datang</h1>
+    <p>Contoh halaman HTML sederhana</p>
+  </header>
+
+  <nav>
+    <a href="#beranda">Beranda</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+
+  <main>
+    <section id="beranda" class="card">
+      <h2>Beranda</h2>
+      <p>Ini adalah contoh halaman HTML dasar yang bisa digunakan untuk belajar atau tugas sekolah.</p>
+    </section>
+
+    <section id="tentang" class="card">
+      <h2>Tentang</h2>
+      <p>Halaman ini dibuat menggunakan HTML dan CSS tanpa framework tambahan.</p>
+    </section>
+
+    <section id="kontak" class="card">
+      <h2>Kontak</h2>
+      <form>
+        <label>Nama:</label><br />
+        <input type="text" placeholder="Masukkan nama" /><br /><br />
+
+        <label>Email:</label><br />
+        <input type="email" placeholder="Masukkan email" /><br /><br />
+
+        <button type="submit">Kirim</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Contoh Page HTML</p>
+  </footer>
+
+</body>
 </html>
+
