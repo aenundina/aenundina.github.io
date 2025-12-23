@@ -46,7 +46,6 @@
         input, select, textarea, button {
             width: 100%;
             padding: 8px;
-            margin-top: 5px;
             margin-bottom: 15px;
         }
         button {
@@ -57,6 +56,11 @@
         }
         button:hover {
             background-color: #d35400;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d35400;
         }
         footer {
             background-color: #e67e22;
@@ -70,61 +74,31 @@
 
 <header>
     <h1>🍽 Warung Makan Bu Ainun</h1>
-    <p>Silakan pesan makanan favorit Anda</p>
 </header>
 
 <div class="container">
 
-    <h2>Daftar Menu</h2>
-    <table>
-        <tr>
-            <th>No</th>
-            <th>Menu</th>
-            <th>Harga</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Nasi Goreng</td>
-            <td>Rp15.000</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Mie Goreng</td>
-            <td>Rp12.000</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Ayam Goreng</td>
-            <td>Rp18.000</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Es Teh</td>
-            <td>Rp5.000</td>
-        </tr>
-    </table>
-
     <h2>Form Pemesanan</h2>
-    <form>
+    <form onsubmit="return false;">
         <label>Nama Pembeli</label>
-        <input type="text" placeholder="Masukkan nama" required>
+        <input type="text" placeholder="Masukkan nama">
 
         <label>Pilih Menu</label>
-        <select required>
-            <option value="">-- Pilih Menu --</option>
-            <option>Nasi Goreng</option>
-            <option>Mie Goreng</option>
-            <option>Ayam Goreng</option>
-            <option>Es Teh</option>
+        <select id="menu" onchange="hitungTotal()">
+            <option value="0">-- Pilih Menu --</option>
+            <option value="15000">Nasi Goreng</option>
+            <option value="12000">Mie Goreng</option>
+            <option value="18000">Ayam Goreng</option>
+            <option value="5000">Es Teh</option>
         </select>
 
         <label>Jumlah</label>
-        <input type="number" min="1" required>
+        <input type="number" id="jumlah" min="1" value="1" onchange="hitungTotal()">
 
-        <label>Catatan</label>
-        <textarea placeholder="Contoh: pedas, tanpa bawang"></textarea>
+        <label>Total Harga</label>
+        <input type="text" id="total" readonly class="total">
 
-        <button type="submit">Pesan Sekarang</button>
+        <button type="button" onclick="alert('Pesanan berhasil!')">Pesan</button>
     </form>
 
 </div>
@@ -132,6 +106,16 @@
 <footer>
     <p>© 2025 Warung Makan Bu Ainun</p>
 </footer>
+
+<script>
+    function hitungTotal() {
+        let harga = document.getElementById("menu").value;
+        let jumlah = document.getElementById("jumlah").value;
+        let total = harga * jumlah;
+
+        document.getElementById("total").value = "Rp " + total.toLocaleString("id-ID");
+    }
+</script>
 
 </body>
 </html>
