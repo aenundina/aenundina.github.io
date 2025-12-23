@@ -1,4 +1,4 @@
-[12.23, 23/12/2025] a: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -38,13 +38,13 @@
             background-color: #f39c12;
             color: white;
         }
-        form {
+        form, .hasil {
             background: white;
             padding: 20px;
             border-radius: 5px;
             margin-top: 20px;
         }
-        input, select, textarea, button {
+        input, select, button {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -55,9 +55,8 @@
             border: none;
             cursor: pointer;
         }
-        .total {
-            font-weight: bold;
-            color: #d35400;
+        .hasil {
+            display: none;
         }
         footer {
             background-color: #d35400;
@@ -77,45 +76,29 @@
 
 <div class="container">
 
-    <!-- BAGIAN DAFTAR MENU -->
+    <!-- DAFTAR MENU -->
     <h2>Daftar Menu</h2>
     <table>
         <tr>
             <th>No</th>
-            <th>Nama Menu</th>
+            <th>Menu</th>
             <th>Harga</th>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>Nasi Goreng</td>
-            <td>Rp15.000</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Mie Goreng</td>
-            <td>Rp12.000</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Ayam Goreng</td>
-            <td>Rp18.000</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Es Teh</td>
-            <td>Rp5.000</td>
-        </tr>
+        <tr><td>1</td><td>Nasi Goreng</td><td>Rp15.000</td></tr>
+        <tr><td>2</td><td>Mie Goreng</td><td>Rp12.000</td></tr>
+        <tr><td>3</td><td>Ayam Goreng</td><td>Rp18.000</td></tr>
+        <tr><td>4</td><td>Es Teh</td><td>Rp5.000</td></tr>
     </table>
 
-    <!-- BAGIAN FORM PEMESANAN -->
+    <!-- FORM -->
     <h2>Form Pemesanan</h2>
     <form onsubmit="return false;">
         <label>Nama Pembeli</label>
-        <input type="text" required>
+        <input type="text" id="nama" required>
 
         <label>Pilih Menu</label>
         <select id="menu" onchange="hitungTotal()" required>
-            <option value="0">-- Pilih Menu --</option>
+            <option value="">-- Pilih Menu --</option>
             <option value="15000">Nasi Goreng</option>
             <option value="12000">Mie Goreng</option>
             <option value="18000">Ayam Goreng</option>
@@ -126,10 +109,19 @@
         <input type="number" id="jumlah" min="1" value="1" onchange="hitungTotal()">
 
         <label>Total Harga</label>
-        <input type="text" id="total" class="total" readonly>
+        <input type="text" id="total" readonly>
 
-        <button type="button" onclick="alert('Pesanan berhasil')">Pesan</button>
+        <button type="button" onclick="pesan()">Pesan</button>
     </form>
+
+    <!-- HASIL PESANAN -->
+    <div class="hasil" id="hasil">
+        <h2>Detail Pesanan</h2>
+        <p><b>Nama:</b> <span id="hasilNama"></span></p>
+        <p><b>Menu:</b> <span id="hasilMenu"></span></p>
+        <p><b>Jumlah:</b> <span id="hasilJumlah"></span></p>
+        <p><b>Total:</b> <span id="hasilTotal"></span></p>
+    </div>
 
 </div>
 
@@ -138,9 +130,44 @@
 </footer>
 
 <script>
-    function hitungTotal() {
-        let harga = document.getElementById("menu
-[12.28, 23/12/2025] a: <!DOCTYPE html>
+function hitungTotal() {
+    let menu = document.getElementById("menu");
+    let harga = menu.value;
+    let jumlah = document.getElementById("jumlah").value;
+
+    if (harga) {
+        let total = harga * jumlah;
+        document.getElementById("total").value = 
+            "Rp " + total.toLocaleString("id-ID");
+    } else {
+        document.getElementById("total").value = "";
+    }
+}
+
+function pesan() {
+    let nama = document.getElementById("nama").value;
+    let menu = document.getElementById("menu");
+    let menuText = menu.options[menu.selectedIndex].text;
+    let jumlah = document.getElementById("jumlah").value;
+    let total = document.getElementById("total").value;
+
+    if (!nama || !menu.value) {
+        alert("Lengkapi data terlebih dahulu!");
+        return;
+    }
+
+    document.getElementById("hasilNama").innerText = nama;
+    document.getElementById("hasilMenu").innerText = menuText;
+    document.getElementById("hasilJumlah").innerText = jumlah;
+    document.getElementById("hasilTotal").innerText = total;
+
+    document.getElementById("hasil").style.display = "block";
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
