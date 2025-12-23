@@ -2,21 +2,21 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Warung Makan Sederhana</title>
+    <title>Game Petualangan Nusantara</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f4f4f4;
+            background-color: #0f172a;
+            color: white;
         }
         header {
-            background-color: #d35400;
-            color: white;
+            background-color: #1e293b;
             padding: 20px;
             text-align: center;
         }
         nav {
-            background-color: #e67e22;
+            background-color: #2563eb;
             padding: 10px;
             text-align: center;
         }
@@ -29,26 +29,25 @@
         section {
             padding: 20px;
         }
-        .menu {
-            background-color: white;
+        .card {
+            background-color: #1e293b;
             padding: 15px;
-            border-radius: 5px;
             margin-bottom: 20px;
+            border-radius: 8px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        button {
+            background-color: #22c55e;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
+        button:hover {
+            background-color: #16a34a;
         }
         footer {
-            background-color: #d35400;
-            color: white;
+            background-color: #1e293b;
             text-align: center;
             padding: 10px;
         }
@@ -57,62 +56,49 @@
 <body>
 
 <header>
-    <h1>Warung Makan Bu Anam</h1>
-    <p>Murah • Enak • Kenyang</p>
+    <h1>Game Petualangan Nusantara</h1>
+    <p>Jelajahi Dunia, Kalahkan Musuh, Raih Skor Tertinggi!</p>
 </header>
 
 <nav>
     <a href="#home">Home</a>
-    <a href="#menu">Menu</a>
-    <a href="#kontak">Kontak</a>
+    <a href="#game">Tentang Game</a>
+    <a href="#fitur">Fitur</a>
 </nav>
 
 <section id="home">
-    <h2>Selamat Datang</h2>
-    <p>Warung Makan Bu Anam menyediakan berbagai makanan rumahan dengan harga terjangkau.</p>
+    <div class="card">
+        <h2>Selamat Datang Gamer!</h2>
+        <p>Game Petualangan Nusantara adalah game seru dengan tema petualangan dan budaya Indonesia.</p>
+        <button>Mainkan Sekarang</button>
+    </div>
 </section>
 
-<section id="menu" class="menu">
-    <h2>Menu Makanan</h2>
-    <table>
-        <tr>
-            <th>No</th>
-            <th>Nama Makanan</th>
-            <th>Harga</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Nasi Goreng</td>
-            <td>Rp 12.000</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Mie Goreng</td>
-            <td>Rp 10.000</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Ayam Goreng</td>
-            <td>Rp 15.000</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Es Teh</td>
-            <td>Rp 3.000</td>
-        </tr>
-    </table>
+<section id="game">
+    <div class="card">
+        <h2>Tentang Game</h2>
+        <p>
+            Dalam game ini, pemain akan menjelajahi berbagai daerah,
+            mengumpulkan koin, dan menghindari rintangan.
+        </p>
+    </div>
 </section>
 
-<section id="kontak">
-    <h2>Kontak</h2>
-    <p>Alamat: Jl. Raya Sakra Timur</p>
-    <p>Telepon: 0812-3456-7890</p>
+<section id="fitur">
+    <div class="card">
+        <h2>Fitur Game</h2>
+        <ul>
+            <li>🎮 Gameplay mudah dan menyenangkan</li>
+            <li>🗺️ Peta petualangan</li>
+            <li>🏆 Sistem skor</li>
+            <li>🎵 Musik latar seru</li>
+        </ul>
+    </div>
 </section>
 
 <footer>
-    <p>&copy; 2025 Warung Makan Bu Anam</p>
+    <p>&copy; 2025 Game Petualangan Nusantara</p>
 </footer>
 
 </body>
 </html>
-
