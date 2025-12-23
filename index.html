@@ -16,33 +16,31 @@ header, footer {
     padding: 15px;
 }
 .container {
-    width: 80%;
+    width: 90%;
     margin: auto;
     padding: 20px;
 }
-h2 { color: #d35400; }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
 }
-th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
+.menu-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
     text-align: center;
 }
-th {
-    background-color: #f39c12;
-    color: white;
+.menu-card h3 {
+    margin: 10px 0 5px;
 }
-button {
-    width: 100%;
-    padding: 10px;
+.menu-card button {
     background-color: #d35400;
     color: white;
     border: none;
+    padding: 8px;
+    width: 100%;
     cursor: pointer;
-    margin-top: 15px;
 }
 .section {
     display: none;
@@ -50,14 +48,18 @@ button {
 .section.active {
     display: block;
 }
-input, select {
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+input, button {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
 }
-.box {
-    background: white;
-    padding: 20px;
+.total {
+    font-weight: bold;
 }
 </style>
 </head>
@@ -69,55 +71,68 @@ input, select {
 
 <div class="container">
 
-<!-- ===== DAFTAR MENU ===== -->
+<!-- ===== MENU (GOFOOD STYLE) ===== -->
 <div id="menuSection" class="section active">
     <h2>Daftar Menu</h2>
-    <table>
-        <tr><th>No</th><th>Menu</th><th>Harga</th></tr>
-        <tr><td>1</td><td>Nasi Goreng</td><td>Rp15.000</td></tr>
-        <tr><td>2</td><td>Mie Goreng</td><td>Rp12.000</td></tr>
-        <tr><td>3</td><td>Ayam Goreng</td><td>Rp18.000</td></tr>
-        <tr><td>4</td><td>Es Teh</td><td>Rp5.000</td></tr>
-    </table>
-    <button onclick="keForm()">Pesan</button>
+
+    <div class="menu-grid">
+        <div class="menu-card">
+            <h3>Nasi Goreng</h3>
+            <p>Rp15.000</p>
+            <button onclick="pilihMenu('Nasi Goreng',15000)">Pesan</button>
+        </div>
+        <div class="menu-card">
+            <h3>Mie Goreng</h3>
+            <p>Rp12.000</p>
+            <button onclick="pilihMenu('Mie Goreng',12000)">Pesan</button>
+        </div>
+        <div class="menu-card">
+            <h3>Ayam Goreng</h3>
+            <p>Rp18.000</p>
+            <button onclick="pilihMenu('Ayam Goreng',18000)">Pesan</button>
+        </div>
+        <div class="menu-card">
+            <h3>Es Teh</h3>
+            <p>Rp5.000</p>
+            <button onclick="pilihMenu('Es Teh',5000)">Pesan</button>
+        </div>
+    </div>
 </div>
 
 <!-- ===== FORM PEMESANAN ===== -->
 <div id="formSection" class="section">
-    <h2>Form Pemesanan</h2>
-    <div class="box">
-        <label>Nama Pembeli</label>
-        <input type="text" id="nama">
+    <h2>Pesan Menu</h2>
 
-        <label>Pilih Menu</label>
-        <select id="menu" onchange="hitungTotal()">
-            <option value="">-- Pilih Menu --</option>
-            <option value="15000">Nasi Goreng</option>
-            <option value="12000">Mie Goreng</option>
-            <option value="18000">Ayam Goreng</option>
-            <option value="5000">Es Teh</option>
-        </select>
+    <form onsubmit="return false;">
+        <label>Nama Pembeli</label>
+        <input type="text" id="nama" required>
+
+        <label>Menu</label>
+        <input type="text" id="menuNama" readonly>
+
+        <label>Harga</label>
+        <input type="text" id="harga" readonly>
 
         <label>Jumlah</label>
         <input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
 
         <label>Total Harga</label>
-        <input type="text" id="total" readonly>
+        <input type="text" id="total" class="total" readonly>
 
         <button onclick="pesan()">Pesan Sekarang</button>
-    </div>
+        <button onclick="kembali()">Kembali ke Menu</button>
+    </form>
 </div>
 
 <!-- ===== HASIL ===== -->
 <div id="hasilSection" class="section">
     <h2>Detail Pesanan</h2>
-    <div class="box">
-        <p><b>Nama:</b> <span id="hNama"></span></p>
-        <p><b>Menu:</b> <span id="hMenu"></span></p>
-        <p><b>Jumlah:</b> <span id="hJumlah"></span></p>
-        <p><b>Total:</b> <span id="hTotal"></span></p>
-        <button onclick="kembali()">Kembali ke Menu</button>
-    </div>
+    <p><b>Nama:</b> <span id="hNama"></span></p>
+    <p><b>Menu:</b> <span id="hMenu"></span></p>
+    <p><b>Jumlah:</b> <span id="hJumlah"></span></p>
+    <p><b>Total:</b> <span id="hTotal"></span></p>
+
+    <button onclick="kembali()">Pesan Lagi</button>
 </div>
 
 </div>
@@ -127,25 +142,31 @@ input, select {
 </footer>
 
 <script>
-function keForm() {
+let hargaMenu = 0;
+
+function pilihMenu(nama, harga) {
+    hargaMenu = harga;
+    menuNama.value = nama;
+    harga.value = "Rp " + harga.toLocaleString("id-ID");
+    jumlah.value = 1;
+    total.value = "Rp " + harga.toLocaleString("id-ID");
+
     menuSection.classList.remove("active");
     formSection.classList.add("active");
 }
 
 function hitungTotal() {
-    if (menu.value) {
-        total.value = "Rp " + (menu.value * jumlah.value).toLocaleString("id-ID");
-    }
+    total.value = "Rp " + (hargaMenu * jumlah.value).toLocaleString("id-ID");
 }
 
 function pesan() {
-    if (!nama.value || !menu.value) {
-        alert("Lengkapi data!");
+    if (!nama.value) {
+        alert("Isi nama terlebih dahulu!");
         return;
     }
 
     hNama.innerText = nama.value;
-    hMenu.innerText = menu.options[menu.selectedIndex].text;
+    hMenu.innerText = menuNama.value;
     hJumlah.innerText = jumlah.value;
     hTotal.innerText = total.value;
 
@@ -155,6 +176,7 @@ function pesan() {
 
 function kembali() {
     hasilSection.classList.remove("active");
+    formSection.classList.remove("active");
     menuSection.classList.add("active");
 }
 </script>
