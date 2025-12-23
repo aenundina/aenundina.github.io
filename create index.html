@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Warung Makan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        header {
+            background-color: #e67e22;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #e67e22;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f39c12;
+            color: white;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d35400;
+        }
+        footer {
+            background-color: #e67e22;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🍽 Warung Makan Bu Ainun</h1>
+    <p>Silakan pesan makanan favorit Anda</p>
+</header>
+
+<div class="container">
+
+    <h2>Daftar Menu</h2>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Menu</th>
+            <th>Harga</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Nasi Goreng</td>
+            <td>Rp15.000</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Mie Goreng</td>
+            <td>Rp12.000</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ayam Goreng</td>
+            <td>Rp18.000</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Es Teh</td>
+            <td>Rp5.000</td>
+        </tr>
+    </table>
+
+    <h2>Form Pemesanan</h2>
+    <form>
+        <label>Nama Pembeli</label>
+        <input type="text" placeholder="Masukkan nama" required>
+
+        <label>Pilih Menu</label>
+        <select required>
+            <option value="">-- Pilih Menu --</option>
+            <option>Nasi Goreng</option>
+            <option>Mie Goreng</option>
+            <option>Ayam Goreng</option>
+            <option>Es Teh</option>
+        </select>
+
+        <label>Jumlah</label>
+        <input type="number" min="1" required>
+
+        <label>Catatan</label>
+        <textarea placeholder="Contoh: pedas, tanpa bawang"></textarea>
+
+        <button type="submit">Pesan Sekarang</button>
+    </form>
+
+</div>
+
+<footer>
+    <p>© 2025 Warung Makan Bu Ainun</p>
+</footer>
+
+</body>
+</html>
