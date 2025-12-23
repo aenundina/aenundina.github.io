@@ -9,11 +9,11 @@
             background-color: #f8f8f8;
             margin: 0;
         }
-        header {
+        header, footer {
             background-color: #d35400;
             color: white;
-            padding: 15px;
             text-align: center;
+            padding: 15px;
         }
         .container {
             width: 80%;
@@ -38,32 +38,31 @@
             background-color: #f39c12;
             color: white;
         }
-        form, .hasil {
+        button {
+            padding: 10px;
+            background-color: #d35400;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+        }
+        form {
             background: white;
             padding: 20px;
             border-radius: 5px;
             margin-top: 20px;
         }
-        input, select, button {
+        input, select {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
         }
-        button {
-            background-color: #d35400;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
         .hasil {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
             display: none;
-        }
-        footer {
-            background-color: #d35400;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 40px;
         }
     </style>
 </head>
@@ -76,28 +75,27 @@
 
 <div class="container">
 
-    <!-- DAFTAR MENU -->
-    <h2>Daftar Menu</h2>
+    <!-- ===== DAFTAR MENU ===== -->
+    <h2 id="menu">Daftar Menu</h2>
     <table>
-        <tr>
-            <th>No</th>
-            <th>Menu</th>
-            <th>Harga</th>
-        </tr>
+        <tr><th>No</th><th>Menu</th><th>Harga</th></tr>
         <tr><td>1</td><td>Nasi Goreng</td><td>Rp15.000</td></tr>
         <tr><td>2</td><td>Mie Goreng</td><td>Rp12.000</td></tr>
         <tr><td>3</td><td>Ayam Goreng</td><td>Rp18.000</td></tr>
         <tr><td>4</td><td>Es Teh</td><td>Rp5.000</td></tr>
     </table>
 
-    <!-- FORM -->
-    <h2>Form Pemesanan</h2>
+    <!-- TOMBOL PINDAH -->
+    <button onclick="keForm()">Pesan Sekarang</button>
+
+    <!-- ===== FORM PEMESANAN ===== -->
+    <h2 id="pemesanan">Form Pemesanan</h2>
     <form onsubmit="return false;">
         <label>Nama Pembeli</label>
         <input type="text" id="nama" required>
 
         <label>Pilih Menu</label>
-        <select id="menu" onchange="hitungTotal()" required>
+        <select id="menuPilih" onchange="hitungTotal()" required>
             <option value="">-- Pilih Menu --</option>
             <option value="15000">Nasi Goreng</option>
             <option value="12000">Mie Goreng</option>
@@ -106,21 +104,21 @@
         </select>
 
         <label>Jumlah</label>
-        <input type="number" id="jumlah" min="1" value="1" onchange="hitungTotal()">
+        <input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
 
         <label>Total Harga</label>
         <input type="text" id="total" readonly>
 
-        <button type="button" onclick="pesan()">Pesan</button>
+        <button type="button" onclick="tampilkanPesanan()">Pesan</button>
     </form>
 
-    <!-- HASIL PESANAN -->
+    <!-- ===== HASIL ===== -->
     <div class="hasil" id="hasil">
         <h2>Detail Pesanan</h2>
-        <p><b>Nama:</b> <span id="hasilNama"></span></p>
-        <p><b>Menu:</b> <span id="hasilMenu"></span></p>
-        <p><b>Jumlah:</b> <span id="hasilJumlah"></span></p>
-        <p><b>Total:</b> <span id="hasilTotal"></span></p>
+        <p><b>Nama:</b> <span id="hNama"></span></p>
+        <p><b>Menu:</b> <span id="hMenu"></span></p>
+        <p><b>Jumlah:</b> <span id="hJumlah"></span></p>
+        <p><b>Total:</b> <span id="hTotal"></span></p>
     </div>
 
 </div>
@@ -130,205 +128,30 @@
 </footer>
 
 <script>
-function hitungTotal() {
-    let menu = document.getElementById("menu");
-    let harga = menu.value;
-    let jumlah = document.getElementById("jumlah").value;
+function keForm() {
+    document.getElementById("pemesanan").scrollIntoView({behavior: "smooth"});
+}
 
+function hitungTotal() {
+    let harga = document.getElementById("menuPilih").value;
+    let jumlah = document.getElementById("jumlah").value;
     if (harga) {
-        let total = harga * jumlah;
-        document.getElementById("total").value = 
-            "Rp " + total.toLocaleString("id-ID");
-    } else {
-        document.getElementById("total").value = "";
+        document.getElementById("total").value =
+            "Rp " + (harga * jumlah).toLocaleString("id-ID");
     }
 }
 
-function pesan() {
-    let nama = document.getElementById("nama").value;
-    let menu = document.getElementById("menu");
-    let menuText = menu.options[menu.selectedIndex].text;
-    let jumlah = document.getElementById("jumlah").value;
-    let total = document.getElementById("total").value;
-
-    if (!nama || !menu.value) {
-        alert("Lengkapi data terlebih dahulu!");
+function tampilkanPesanan() {
+    let menu = document.getElementById("menuPilih");
+    if (!nama.value || !menu.value) {
+        alert("Lengkapi data!");
         return;
     }
 
-    document.getElementById("hasilNama").innerText = nama;
-    document.getElementById("hasilMenu").innerText = menuText;
-    document.getElementById("hasilJumlah").innerText = jumlah;
-    document.getElementById("hasilTotal").innerText = total;
-
-    document.getElementById("hasil").style.display = "block";
-}
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Warung Makan Bu Ainun</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-        }
-        header {
-            background-color: #d35400;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-        h2 {
-            color: #d35400;
-            margin-top: 40px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f39c12;
-            color: white;
-        }
-        form, .hasil {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-        }
-        button {
-            background-color: #d35400;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .hasil {
-            display: none;
-        }
-        footer {
-            background-color: #d35400;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 40px;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>🍽 Warung Makan Bu Ainun</h1>
-    <p>Makanan Enak • Harga Bersahabat</p>
-</header>
-
-<div class="container">
-
-    <!-- DAFTAR MENU -->
-    <h2>Daftar Menu</h2>
-    <table>
-        <tr>
-            <th>No</th>
-            <th>Menu</th>
-            <th>Harga</th>
-        </tr>
-        <tr><td>1</td><td>Nasi Goreng</td><td>Rp15.000</td></tr>
-        <tr><td>2</td><td>Mie Goreng</td><td>Rp12.000</td></tr>
-        <tr><td>3</td><td>Ayam Goreng</td><td>Rp18.000</td></tr>
-        <tr><td>4</td><td>Es Teh</td><td>Rp5.000</td></tr>
-    </table>
-
-    <!-- FORM -->
-    <h2>Form Pemesanan</h2>
-    <form onsubmit="return false;">
-        <label>Nama Pembeli</label>
-        <input type="text" id="nama" required>
-
-        <label>Pilih Menu</label>
-        <select id="menu" onchange="hitungTotal()" required>
-            <option value="">-- Pilih Menu --</option>
-            <option value="15000">Nasi Goreng</option>
-            <option value="12000">Mie Goreng</option>
-            <option value="18000">Ayam Goreng</option>
-            <option value="5000">Es Teh</option>
-        </select>
-
-        <label>Jumlah</label>
-        <input type="number" id="jumlah" min="1" value="1" onchange="hitungTotal()">
-
-        <label>Total Harga</label>
-        <input type="text" id="total" readonly>
-
-        <button type="button" onclick="pesan()">Pesan</button>
-    </form>
-
-    <!-- HASIL PESANAN -->
-    <div class="hasil" id="hasil">
-        <h2>Detail Pesanan</h2>
-        <p><b>Nama:</b> <span id="hasilNama"></span></p>
-        <p><b>Menu:</b> <span id="hasilMenu"></span></p>
-        <p><b>Jumlah:</b> <span id="hasilJumlah"></span></p>
-        <p><b>Total:</b> <span id="hasilTotal"></span></p>
-    </div>
-
-</div>
-
-<footer>
-    <p>© 2025 Warung Makan Bu Ainun</p>
-</footer>
-
-<script>
-function hitungTotal() {
-    let menu = document.getElementById("menu");
-    let harga = menu.value;
-    let jumlah = document.getElementById("jumlah").value;
-
-    if (harga) {
-        let total = harga * jumlah;
-        document.getElementById("total").value = 
-            "Rp " + total.toLocaleString("id-ID");
-    } else {
-        document.getElementById("total").value = "";
-    }
-}
-
-function pesan() {
-    let nama = document.getElementById("nama").value;
-    let menu = document.getElementById("menu");
-    let menuText = menu.options[menu.selectedIndex].text;
-    let jumlah = document.getElementById("jumlah").value;
-    let total = document.getElementById("total").value;
-
-    if (!nama || !menu.value) {
-        alert("Lengkapi data terlebih dahulu!");
-        return;
-    }
-
-    document.getElementById("hasilNama").innerText = nama;
-    document.getElementById("hasilMenu").innerText = menuText;
-    document.getElementById("hasilJumlah").innerText = jumlah;
-    document.getElementById("hasilTotal").innerText = total;
+    document.getElementById("hNama").innerText = nama.value;
+    document.getElementById("hMenu").innerText = menu.options[menu.selectedIndex].text;
+    document.getElementById("hJumlah").innerText = jumlah.value;
+    document.getElementById("hTotal").innerText = total.value;
 
     document.getElementById("hasil").style.display = "block";
 }
