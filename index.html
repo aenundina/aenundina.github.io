@@ -2,103 +2,45 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Game Petualangan Nusantara</title>
+    <title>Game Tebak Angka</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
             background-color: #0f172a;
             color: white;
-        }
-        header {
-            background-color: #1e293b;
-            padding: 20px;
             text-align: center;
+            padding-top: 50px;
         }
-        nav {
-            background-color: #2563eb;
+        input {
             padding: 10px;
+            font-size: 16px;
+            width: 80px;
             text-align: center;
-        }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        section {
-            padding: 20px;
-        }
-        .card {
-            background-color: #1e293b;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
         }
         button {
-            background-color: #22c55e;
-            color: black;
-            border: none;
             padding: 10px 15px;
-            border-radius: 5px;
+            font-size: 16px;
+            background-color: #22c55e;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
+            margin-left: 5px;
         }
         button:hover {
             background-color: #16a34a;
         }
-        footer {
-            background-color: #1e293b;
-            text-align: center;
-            padding: 10px;
+        .hasil {
+            margin-top: 20px;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Game Petualangan Nusantara</h1>
-    <p>Jelajahi Dunia, Kalahkan Musuh, Raih Skor Tertinggi!</p>
-</header>
+    <h1>🎲 Game Tebak Angka</h1>
+    <p>Tebak angka antara <b>1 sampai 10</b></p>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#game">Tentang Game</a>
-    <a href="#fitur">Fitur</a>
-</nav>
+    <input type="number" id="tebakan" min="1" max="10">
+    <button onclick="cekTebakan()">Tebak</button>
 
-<section id="home">
-    <div class="card">
-        <h2>Selamat Datang Gamer!</h2>
-        <p>Game Petualangan Nusantara adalah game seru dengan tema petualangan dan budaya Indonesia.</p>
-        <button>Mainkan Sekarang</button>
-    </div>
-</section>
-
-<section id="game">
-    <div class="card">
-        <h2>Tentang Game</h2>
-        <p>
-            Dalam game ini, pemain akan menjelajahi berbagai daerah,
-            mengumpulkan koin, dan menghindari rintangan.
-        </p>
-    </div>
-</section>
-
-<section id="fitur">
-    <div class="card">
-        <h2>Fitur Game</h2>
-        <ul>
-            <li>🎮 Gameplay mudah dan menyenangkan</li>
-            <li>🗺️ Peta petualangan</li>
-            <li>🏆 Sistem skor</li>
-            <li>🎵 Musik latar seru</li>
-        </ul>
-    </div>
-</section>
-
-<footer>
-    <p>&copy; 2025 Game Petualangan Nusantara</p>
-</footer>
-
-</body>
-</html>
+    <div class="hasil" id="has
